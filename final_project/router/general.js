@@ -38,11 +38,9 @@ public_users.post("/register", (req, res) => {
 // Define a function to get the book list
 function getBookList() {
   return new Promise((resolve, reject) => {
-    // Simulating asynchronous operation (fetching book list from the database)
     setTimeout(() => {
-      // Assuming 'books' is your database
       resolve(books);
-    }, 1000); // Simulating 1 second delay
+    }, 1000); 
   });
 }
 
@@ -59,8 +57,7 @@ public_users.get('/', function (req, res) {
 
 // Get book details based on ISBN
 function getBookDetailsByISBN(isbn) {
-  return new Promise((resolve, reject) => {
-    // Simulating asynchronous operation (fetching book details from the database)
+  return new Promise((resolve, reject) => { 
     setTimeout(() => {
       const isbnBooks = books[isbn];
       if (isbnBooks) {
@@ -68,7 +65,7 @@ function getBookDetailsByISBN(isbn) {
       } else {
         reject(new Error(`Book with ISBN ${isbn} not found`));
       }
-    }, 1000); // Simulating 1 second delay
+    }, 1000); 
   });
 }
 public_users.get('/isbn/:isbn', function (req, res) {
@@ -97,7 +94,7 @@ function findBookByAuthor(authorName, booksObject) {
         let strServer = authorName.trim();
         if (strdb.toLowerCase() === strServer.toLowerCase()) {
           resolve(booksObject[key]);
-          return; // Exit the loop if a match is found
+          return; 
         }
       }
     }
@@ -106,10 +103,7 @@ function findBookByAuthor(authorName, booksObject) {
 }
 
 public_users.get('/author/:author', function (req, res) {
-  //Write your code here
   const author = req.params.author;
-
-  // Call the function to find a book by author
   findBookByAuthor(author, books)
     .then((bookAuthor) => {
       res.status(200).send(JSON.stringify(bookAuthor, null, 4));
@@ -136,11 +130,7 @@ function findBookByTitle(title, booksObject) {
   });
 }
 public_users.get('/title/:title', function (req, res) {
-  //Write your code here
-  // Extract title from request parameters
   const title = req.params.title;
-
-  // Call the function to find a book by title
   findBookByTitle(title, books)
     .then((bookTitle) => {
       res.status(200).send(JSON.stringify(bookTitle, null, 4));
